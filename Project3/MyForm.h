@@ -49,7 +49,13 @@ namespace Project3 {
 		private: System::Windows::Forms::Label^ label3;
 		//创建了一个二维数组，100行，105列
 		private:array<int^, 2>^ mapArray = gcnew array<int^, 2>(100, 105);
-		private:
+	private: System::Windows::Forms::Button^ 自己玩;
+	private: System::ComponentModel::BackgroundWorker^ backgroundWorker1;
+	private: System::Windows::Forms::RadioButton^ radioButton6;
+
+
+
+	private:
 			/// <summary>
 			/// 必需的设计器变量。
 			/// </summary>
@@ -75,6 +81,9 @@ namespace Project3 {
 			this->radioButton1 = (gcnew System::Windows::Forms::RadioButton());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
+			this->自己玩 = (gcnew System::Windows::Forms::Button());
+			this->backgroundWorker1 = (gcnew System::ComponentModel::BackgroundWorker());
+			this->radioButton6 = (gcnew System::Windows::Forms::RadioButton());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->groupBox1->SuspendLayout();
 			this->SuspendLayout();
@@ -131,6 +140,7 @@ namespace Project3 {
 			// 
 			// groupBox1
 			// 
+			this->groupBox1->Controls->Add(this->radioButton6);
 			this->groupBox1->Controls->Add(this->radioButton5);
 			this->groupBox1->Controls->Add(this->radioButton4);
 			this->groupBox1->Controls->Add(this->radioButton3);
@@ -138,7 +148,7 @@ namespace Project3 {
 			this->groupBox1->Controls->Add(this->radioButton1);
 			this->groupBox1->Location = System::Drawing::Point(903, 166);
 			this->groupBox1->Name = L"groupBox1";
-			this->groupBox1->Size = System::Drawing::Size(155, 148);
+			this->groupBox1->Size = System::Drawing::Size(155, 173);
 			this->groupBox1->TabIndex = 15;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Brick List";
@@ -216,11 +226,33 @@ namespace Project3 {
 			this->label3->TabIndex = 17;
 			this->label3->Text = L"×";
 			// 
+			// 自己玩
+			// 
+			this->自己玩->Location = System::Drawing::Point(495, 25);
+			this->自己玩->Name = L"自己玩";
+			this->自己玩->Size = System::Drawing::Size(103, 23);
+			this->自己玩->TabIndex = 18;
+			this->自己玩->Text = L"开始自己玩！";
+			this->自己玩->UseVisualStyleBackColor = true;
+			this->自己玩->Click += gcnew System::EventHandler(this, &MyForm::button3_Click);
+			// 
+			// radioButton6
+			// 
+			this->radioButton6->AutoSize = true;
+			this->radioButton6->Location = System::Drawing::Point(7, 135);
+			this->radioButton6->Name = L"radioButton6";
+			this->radioButton6->Size = System::Drawing::Size(59, 16);
+			this->radioButton6->TabIndex = 5;
+			this->radioButton6->TabStop = true;
+			this->radioButton6->Text = L"Target";
+			this->radioButton6->UseVisualStyleBackColor = true;
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 12);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1097, 603);
+			this->Controls->Add(this->自己玩);
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->groupBox1);
@@ -231,6 +263,7 @@ namespace Project3 {
 			this->Controls->Add(this->textBox1);
 			this->Name = L"MyForm";
 			this->Text = L"MyForm";
+			this->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &MyForm::OnKeyDown);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
@@ -256,7 +289,7 @@ namespace Project3 {
 			Image^ img_box_target = cli::safe_cast<Image^>(rm->GetObject("box_target"));
 			Image^ img_man = cli::safe_cast<Image^>(rm->GetObject("man"));
 			Image^ img_ground = cli::safe_cast<Image^>(rm->GetObject("ground"));
-
+			Image^ img_target = cli::safe_cast<Image^>(rm->GetObject("groundWithDot"));
 			/*Image^ img_brick = Image::FromFile("C:\\Users\\Desktop\\brick.png");
 			Image^ img_box = Image::FromFile("C:\\Users\\Desktop\\box.png");
 			Image^ img_box_target = Image::FromFile("C:\\Users\\Desktop\\box_target.png");
@@ -297,7 +330,11 @@ namespace Project3 {
 				mapArray[index_x, index_y] = 5;
 			}
 				
-
+			if (radioButton6->Checked)
+			{
+				dataGridView1[index_x, index_y]->Value = img_target;
+				mapArray[index_x, index_y] = 6;
+			}
 			
 
 
@@ -349,6 +386,40 @@ namespace Project3 {
 			MessageBox^ nmsl2;
 			nmsl2->Show(Convert::ToString(mapArray[2, 2]));
 		}
+	//自己玩选项，点击后
+	private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
 		
-	};
+		//System::Windows::Forms::KeyEventArgs e2;
+		//while(KeyEventArgs::Control)
+		if (Form::KeyPreview == false)
+		{
+			this->自己玩->Text = L"不想玩了";
+			MessageBox^ nmsl2;
+			nmsl2->Show("开始自己玩");
+		}
+			
+		else
+		{
+			this->自己玩->Text = L"开始自己玩！";
+			MessageBox^ nmsl2;
+			nmsl2->Show("不想玩了");
+		}
+		//按一次取反一次，true接受键盘，否则不接受
+		Form::KeyPreview = !Form::KeyPreview;
+
+
+	}
+		   void OnKeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e);
+
+
+};
+}
+
+//在主界面获取键盘输入
+void Project3::MyForm::OnKeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e)
+{
+	MessageBox^ nmsl2;
+	nmsl2->Show(Convert::ToString(mapArray[2, 2]));
+	if(e->KeyCode==Keys::F1)
+		nmsl2->Show("f1,你妈");
 }
