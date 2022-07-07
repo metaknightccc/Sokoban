@@ -52,8 +52,10 @@ namespace Project3 {
 	private: System::Windows::Forms::Button^ 自己玩;
 	private: System::ComponentModel::BackgroundWorker^ backgroundWorker1;
 	private: System::Windows::Forms::RadioButton^ radioButton6;
-
-
+		   //记录下人的行与列
+		   int manRow = 0;
+		   int manCol = 0;
+		   bool hasMan = false;
 
 	private:
 			/// <summary>
@@ -320,8 +322,19 @@ namespace Project3 {
 				
 			if (radioButton4->Checked)
 			{
+				if (this->hasMan == false)//当前还没创建过人
+				{
+					this->hasMan = true;
+
+				}
+				else {//当前已经创建过人了
+					mapArray[this->manRow, this->manCol] = 5;//把之前创建的人的地方改成地面方块
+					dataGridView1[this->manRow, this->manCol]->Value = img_ground;
+				}
 				dataGridView1[index_x, index_y]->Value = img_man;
 				mapArray[index_x, index_y] = 4;
+				this->manRow = index_x;
+				this->manCol = index_y;
 			}
 				
 			if (radioButton5->Checked)
@@ -409,17 +422,10 @@ namespace Project3 {
 
 
 	}
-		   void OnKeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e);
+	//头文件里只声明，实现在cpp里
+	void OnKeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e);
 
 
 };
 }
 
-//在主界面获取键盘输入
-void Project3::MyForm::OnKeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e)
-{
-	MessageBox^ nmsl2;
-	nmsl2->Show(Convert::ToString(mapArray[2, 2]));
-	if(e->KeyCode==Keys::F1)
-		nmsl2->Show("f1,你妈");
-}
