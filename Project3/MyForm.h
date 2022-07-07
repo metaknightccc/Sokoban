@@ -55,7 +55,14 @@ namespace Project3 {
 		   //记录下人的行与列
 		   int manRow = 0;
 		   int manCol = 0;
-		   bool hasMan = false;
+		   bool hasMan = false;//记录是否已经创建过人了
+		   //记录有几个待求箱子
+		   int boxes = 0;
+		   //数组直接记录箱子坐标，最大十个点，其实实际不应该超过5个，多了算法解不出
+		   array<int^, 2>^ boxesArray = gcnew array<int^, 2>(10, 2);
+		   //记录有几个待求点
+		   int targetPos = 0;
+		   //数组直接记录箱子坐标，最大十个点，其实实际不应该超过5个，多了算法解不出
 
 	private:
 			/// <summary>
