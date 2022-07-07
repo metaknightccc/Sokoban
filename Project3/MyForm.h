@@ -47,8 +47,8 @@ namespace Project3 {
 		private: System::Windows::Forms::RadioButton^ radioButton5;
 		private: System::Windows::Forms::Label^ label1;
 		private: System::Windows::Forms::Label^ label3;
-
-
+		//创建了一个二维数组，100行，105列
+		private:array<int^, 2>^ mapArray = gcnew array<int^, 2>(100, 105);
 		private:
 			/// <summary>
 			/// 必需的设计器变量。
@@ -125,7 +125,7 @@ namespace Project3 {
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->RowHeadersVisible = false;
 			this->dataGridView1->RowTemplate->Height = 64;
-			this->dataGridView1->Size = System::Drawing::Size(442, 247);
+			this->dataGridView1->Size = System::Drawing::Size(859, 472);
 			this->dataGridView1->TabIndex = 4;
 			this->dataGridView1->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MyForm::dataGridView1_CellContentClick);
 			// 
@@ -136,7 +136,7 @@ namespace Project3 {
 			this->groupBox1->Controls->Add(this->radioButton3);
 			this->groupBox1->Controls->Add(this->radioButton2);
 			this->groupBox1->Controls->Add(this->radioButton1);
-			this->groupBox1->Location = System::Drawing::Point(487, 67);
+			this->groupBox1->Location = System::Drawing::Point(903, 166);
 			this->groupBox1->Name = L"groupBox1";
 			this->groupBox1->Size = System::Drawing::Size(155, 148);
 			this->groupBox1->TabIndex = 15;
@@ -220,7 +220,7 @@ namespace Project3 {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 12);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(669, 358);
+			this->ClientSize = System::Drawing::Size(1097, 603);
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->groupBox1);
@@ -268,15 +268,36 @@ namespace Project3 {
 			int index_y = dataGridView1->CurrentCell->RowIndex;
 
 			if (radioButton1->Checked)
+			{
 				dataGridView1[index_x, index_y]->Value = img_brick;
+				mapArray[index_x, index_y] = 1;
+			}
+				
 			if (radioButton2->Checked)
+			{
 				dataGridView1[index_x, index_y]->Value = img_box;
+				mapArray[index_x, index_y] = 2;
+			}
+				
 			if (radioButton3->Checked)
+			{
 				dataGridView1[index_x, index_y]->Value = img_box_target;
+				mapArray[index_x, index_y] = 3;
+			}
+				
 			if (radioButton4->Checked)
+			{
 				dataGridView1[index_x, index_y]->Value = img_man;
+				mapArray[index_x, index_y] = 4;
+			}
+				
 			if (radioButton5->Checked)
+			{
 				dataGridView1[index_x, index_y]->Value = img_ground;
+				mapArray[index_x, index_y] = 5;
+			}
+				
+
 			
 
 
@@ -324,6 +345,9 @@ namespace Project3 {
 		private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e)
 		{
 			//syh到此一游
+			//this->mapArray[2,2] = 1;
+			MessageBox^ nmsl2;
+			nmsl2->Show(Convert::ToString(mapArray[2, 2]));
 		}
 		
 	};
