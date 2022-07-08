@@ -13,9 +13,12 @@ int main(array<String^>^ args) {
 //在主界面获取键盘输入
 void Project3::MyForm::OnKeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e)
 {
+	mapArray[2, 2] = 10;
 	MessageBox^ nmsl2;
 	nmsl2->Show(Convert::ToString(mapArray[2, 2]));
-	if(e->KeyCode==Keys::F1)
-		nmsl2->Show("f1,你妈");
-
+	if(e->KeyCode==Keys::A)
+		nmsl2->Show("A你妈");
 }
+
+
+

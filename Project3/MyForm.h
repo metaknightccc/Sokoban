@@ -48,7 +48,7 @@ namespace Project3 {
 		private: System::Windows::Forms::Label^ label1;
 		private: System::Windows::Forms::Label^ label3;
 		//创建了一个二维数组，100行，105列
-		private:array<int^, 2>^ mapArray = gcnew array<int^, 2>(100, 105);
+		public:array<int^, 2>^ mapArray = gcnew array<int^, 2>(100, 105);
 	private: System::Windows::Forms::Button^ 自己玩;
 	private: System::ComponentModel::BackgroundWorker^ backgroundWorker1;
 	private: System::Windows::Forms::RadioButton^ radioButton6;
@@ -309,6 +309,8 @@ namespace Project3 {
 			int index_x = dataGridView1->CurrentCell->ColumnIndex;
 			int index_y = dataGridView1->CurrentCell->RowIndex;
 
+
+			// mapArray 1:brick 2:box 3:box_target 4:man 5:ground 6:target
 			if (radioButton1->Checked)
 			{
 				dataGridView1[index_x, index_y]->Value = img_brick;
@@ -393,6 +395,7 @@ namespace Project3 {
 			for (int i = 0; i < x; i++) {
 				for (int j = 0; j < y; j++) {
 					dataGridView1[i, j]->Value = cli::safe_cast<Image^>(rm->GetObject("ground"));
+					mapArray[i, j] = 5;
 				}
 			}
 
@@ -401,10 +404,71 @@ namespace Project3 {
 		
 		private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e)
 		{
+
+
+			// test:
+			//Console::WriteLine(mapArray[2,2]);
 			//syh到此一游
 			//this->mapArray[2,2] = 1;
-			MessageBox^ nmsl2;
-			nmsl2->Show(Convert::ToString(mapArray[2, 2]));
+
+			//MessageBox^ nmsl2;
+			//nmsl2->Show(Convert::ToString(mapArray[2, 2]));
+			int x, y;
+			x = Convert::ToInt32(textBox1->Text); // column
+			y = Convert::ToInt32(textBox2->Text); // row
+			int max_length = x;
+
+			// box_robot -:0 ' ':5
+			// wall storage -:0 ' ':5
+			array<int^, 2>^ box_robot = gcnew array<int^, 2>(x, y);
+			array<int^, 2>^ wall_storage_space = gcnew array<int^, 2>(x, y);
+			for (int i = 0; i < x; i++) {
+				for (int j = 0; j < y; j++) {
+					box_robot[i,j] = 0;
+					wall_storage_space[i,j] = 0;
+				}
+			}
+
+
+			// mapArray 1:brick 2:box 3:box_target 4:man 5:ground 6:target
+			for (int i = 0; i < x; i++) {
+				for (int j = 0; j < y; j++) {
+					if (mapArray[i, j] == 2 || mapArray[i,j] == 4) {
+						box_robot[i, j] = mapArray[i, j];
+						wall_storage_space[i, j] = 5;
+					}
+					else if (mapArray[i, j] == 6 || mapArray[i, j] == 1) {
+						box_robot[i, j] = 5;
+						wall_storage_space[i, j] = mapArray[i,j];
+					}
+					else if (mapArray[i, j] == 5) {
+						box_robot[i, j] = 5;
+						wall_storage_space[i, j] = 5;
+					}
+
+				}
+			}
+
+			array<int^, 2>^ target_pos = gcnew array<int^, 2>(10, 2);
+			int temp = 0;
+			for (int i = 0; i < x; i++) {
+				for (int j = 0; j < y; j++) {
+					if (wall_storage_space[i, j] == 6) {
+						target_pos[temp, 0] = i;
+						target_pos[temp, 1] = j;
+						temp++;
+					}
+				}
+			}
+
+			Console::WriteLine(Convert::ToString(manhatten_dis()));
+
+
+
+		}
+
+		private: int manhatten_dis() {
+			return 123;
 		}
 	//自己玩选项，点击后
 	private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -431,6 +495,7 @@ namespace Project3 {
 	}
 	//头文件里只声明，实现在cpp里
 	void OnKeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e);
+
 
 
 };
