@@ -306,26 +306,26 @@ namespace Project3 {
 
 
 			// set a image for the cell[index_x,index_y]
-			int index_x = dataGridView1->CurrentCell->ColumnIndex;
-			int index_y = dataGridView1->CurrentCell->RowIndex;
+			int index_y = dataGridView1->CurrentCell->ColumnIndex;
+			int index_x = dataGridView1->CurrentCell->RowIndex;
 
 
 			// mapArray 1:brick 2:box 3:box_target 4:man 5:ground 6:target
 			if (radioButton1->Checked)
 			{
-				dataGridView1[index_x, index_y]->Value = img_brick;
+				dataGridView1[index_y, index_x]->Value = img_brick;
 				mapArray[index_x, index_y] = 1;
 			}
 				
 			if (radioButton2->Checked)
 			{
-				dataGridView1[index_x, index_y]->Value = img_box;
+				dataGridView1[index_y, index_x]->Value = img_box;
 				mapArray[index_x, index_y] = 2;
 			}
 				
 			if (radioButton3->Checked)
 			{
-				dataGridView1[index_x, index_y]->Value = img_box_target;
+				dataGridView1[index_y, index_x]->Value = img_box_target;
 				mapArray[index_x, index_y] = 3;
 			}
 				
@@ -338,9 +338,9 @@ namespace Project3 {
 				}
 				else {//当前已经创建过人了
 					mapArray[this->manRow, this->manCol] = 5;//把之前创建的人的地方改成地面方块
-					dataGridView1[this->manRow, this->manCol]->Value = img_ground;
+					dataGridView1[this->manCol, this->manRow]->Value = img_ground;
 				}
-				dataGridView1[index_x, index_y]->Value = img_man;
+				dataGridView1[index_y, index_x]->Value = img_man;
 				mapArray[index_x, index_y] = 4;
 				this->manRow = index_x;
 				this->manCol = index_y;
@@ -348,13 +348,13 @@ namespace Project3 {
 				
 			if (radioButton5->Checked)
 			{
-				dataGridView1[index_x, index_y]->Value = img_ground;
+				dataGridView1[index_y, index_x]->Value = img_ground;
 				mapArray[index_x, index_y] = 5;
 			}
 				
 			if (radioButton6->Checked)
 			{
-				dataGridView1[index_x, index_y]->Value = img_target;
+				dataGridView1[index_y, index_x]->Value = img_target;
 				mapArray[index_x, index_y] = 6;
 			}
 			
@@ -405,67 +405,99 @@ namespace Project3 {
 		private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e)
 		{
 
-
-			// test:
-			//Console::WriteLine(mapArray[2,2]);
-			//syh到此一游
-			//this->mapArray[2,2] = 1;
-
-			//MessageBox^ nmsl2;
-			//nmsl2->Show(Convert::ToString(mapArray[2, 2]));
 			int x, y;
-			x = Convert::ToInt32(textBox1->Text); // column
-			y = Convert::ToInt32(textBox2->Text); // row
+			x = Convert::ToInt32(textBox1->Text); // row
+			y = Convert::ToInt32(textBox2->Text); // col
 			int max_length = x;
 
 			// box_robot -:0 ' ':5
-			// wall storage -:0 ' ':5
+			 //wall storage -:0 ' ':5
+			
 			array<int^, 2>^ box_robot = gcnew array<int^, 2>(x, y);
 			array<int^, 2>^ wall_storage_space = gcnew array<int^, 2>(x, y);
+			//注意xy为0的时候可能会溢出，所以地下有提示
 			for (int i = 0; i < x; i++) {
 				for (int j = 0; j < y; j++) {
 					box_robot[i,j] = 0;
 					wall_storage_space[i,j] = 0;
 				}
 			}
-
+			//长度不够的行补0没有
 
 			// mapArray 1:brick 2:box 3:box_target 4:man 5:ground 6:target
+			//1 O 2 B 3 * 4 R 5 人站在点上 6 S
+			//注意先列后行
 			for (int i = 0; i < x; i++) {
 				for (int j = 0; j < y; j++) {
-					if (mapArray[i, j] == 2 || mapArray[i,j] == 4) {
+					//MessageBox::Show("找1-6"+"本次找到的是"+Convert::ToString(mapArray[i, j]));
+					if (mapArray[i, j]->Equals(2) || mapArray[i, j]->Equals(4)) {
+						//box_robot记住R人和B箱子
 						box_robot[i, j] = mapArray[i, j];
-						wall_storage_space[i, j] = 5;
+						//印度哥用的是空格，不知道
+						wall_storage_space[i, j] =5;
 					}
-					else if (mapArray[i, j] == 6 || mapArray[i, j] == 1) {
+					else if (mapArray[i, j]->Equals(6)  || mapArray[i, j]->Equals(1)) {
 						box_robot[i, j] = 5;
+						//MessageBox::Show("找到一个1或6");
+						//wall_storage_space存S即target存储位置和O即阻碍位置
 						wall_storage_space[i, j] = mapArray[i,j];
 					}
-					else if (mapArray[i, j] == 5) {
+					
+					else if (mapArray[i, j] ->Equals(5)) {
 						box_robot[i, j] = 5;
 						wall_storage_space[i, j] = 5;
 					}
 
 				}
 			}
-
-			array<int^, 2>^ target_pos = gcnew array<int^, 2>(10, 2);
-			int temp = 0;
+			MessageBox::Show(Convert::ToString(x));
+			MessageBox::Show(Convert::ToString(y));
+			array<int^, 1>^ target_pos_row = gcnew array<int^, 1>(10);
+			array<int^, 1>^ target_pos_col = gcnew array<int^, 1>(10);
+			int targetNum = 0;
 			for (int i = 0; i < x; i++) {
 				for (int j = 0; j < y; j++) {
-					if (wall_storage_space[i, j] == 6) {
-						target_pos[temp, 0] = i;
-						target_pos[temp, 1] = j;
-						temp++;
+					//Console::WriteLine(wall_storage_space[i, j]);
+					if (wall_storage_space[i, j] ->Equals(6)) {
+						target_pos_row[targetNum] = i;
+						target_pos_col[targetNum++] = j;
+						MessageBox::Show("找到了一个target");
 					}
 				}
 			}
+			
+			MessageBox::Show("目标点有"+Convert::ToString(targetNum)+"个");
+			//MessageBox::Show(Convert::ToString(manhatten_dis()));
 
-			Console::WriteLine(Convert::ToString(manhatten_dis()));
+
+			int boxRobtDistance = 9999999;
+			for (int i = 0; i < x; i++)
+			{
+				for (int j = 0; j < y; j++)
+				{
+					if (box_robot[i, j]->Equals(4))//如果是人，算它和target的曼哈顿距离
+					{
+						for (int k = 0; k < targetNum; k++)
+						{
+							//int tmp = Convert::ToInt32(target_pos_row[k]) - i;
+							//if(boxRobtDistance>(abs()+))
+							//Console::WriteLine(target_pos_row[k]);
+							//Console::WriteLine(target_pos_col[k]);
+							
+							int tmpAbs = Math::Abs(Convert::ToInt32(target_pos_row[k]) - i) + Math::Abs(Convert::ToInt32(target_pos_col[k]) - j);
+							if (boxRobtDistance > tmpAbs)
+							{
+								boxRobtDistance += tmpAbs;
+							}
+						}
+					}
+				}
+			}
+			MessageBox::Show(Convert::ToString(boxRobtDistance));//经验证是计算正确的，还不知道有什么用
+			//以上是到defManhattan之前的所有内容，已经写上了注释，注意x和y的关系，除了datagridview是先列后行外，其他的都是先行后列，已经改好了
 
 
-
-		}
+		}//buttonclick2函数右括号
 
 		private: int manhatten_dis() {
 			return 123;
