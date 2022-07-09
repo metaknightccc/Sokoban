@@ -495,8 +495,12 @@ namespace Project3 {
 			}
 			MessageBox::Show(Convert::ToString(boxRobtDistance));//经验证是计算正确的，还不知道有什么用
 			//以上是到defManhattan之前的所有内容，已经写上了注释，注意x和y的关系，除了datagridview是先列后行外，其他的都是先行后列，已经改好了
+			//mahattan单独写一个函数
 
-
+			Console::WriteLine("正在解");
+			System::Collections::SortedList aq;
+			aq.Add(1, 3);
+			aq.Add(1, 3);
 		}//buttonclick2函数右括号
 
 		private: int manhatten_dis() {
