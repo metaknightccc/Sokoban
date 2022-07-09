@@ -395,6 +395,11 @@ namespace Project3 {
 			for (int i = 0; i < x; i++) {
 				for (int j = 0; j < y; j++) {
 					dataGridView1[i, j]->Value = cli::safe_cast<Image^>(rm->GetObject("ground"));
+				}
+			}
+
+			for (int i = 0; i < y; i++) {
+				for (int j = 0; j < x; j++) {
 					mapArray[i, j] = 5;
 				}
 			}
