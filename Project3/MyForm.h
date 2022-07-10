@@ -755,7 +755,7 @@ namespace Project3 {
 					}
 				}
 			}
-			
+
 		}
 
 		for (int i = 0; i < target_index; i++) {
@@ -764,6 +764,9 @@ namespace Project3 {
 			if (!(mapArray[tempx, tempy]->Equals(3) || mapArray[tempx, tempy]->Equals(2) || mapArray[tempx, tempy]->Equals(4)))
 			{
 				dataGridView1[tempy, tempx]->Value = img_target;
+			}
+			if (mapArray[tempx, tempy]->Equals(2)) {
+				dataGridView1[tempy, tempx]->Value = img_box_target;
 			}
 		}
 

@@ -172,6 +172,9 @@ void Project3::MyForm::OnKeyDown(System::Object^ sender, System::Windows::Forms:
 		{
 			dataGridView1[tempy, tempx]->Value = img_target;
 		}
+		if (mapArray[tempx, tempy]->Equals(2)) {
+			dataGridView1[tempy, tempx]->Value = img_box_target;
+		}
 	}
 
 }
