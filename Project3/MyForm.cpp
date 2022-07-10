@@ -31,6 +31,9 @@ void Project3::MyForm::OnKeyDown(System::Object^ sender, System::Windows::Forms:
 		//Console::WriteLine("----");
 	}
 
+	
+
+	//Console::WriteLine("-====-");
 	//Console::WriteLine("-====-");
 
 
@@ -45,6 +48,8 @@ void Project3::MyForm::OnKeyDown(System::Object^ sender, System::Windows::Forms:
 
 	Console::WriteLine(man_pos_y);
 	Console::WriteLine(man_pos_x);
+
+	
 
 
 	// mapArray 1:brick 2:box 3:box_target 4:man 5:ground 6:target
@@ -157,6 +162,15 @@ void Project3::MyForm::OnKeyDown(System::Object^ sender, System::Windows::Forms:
 				dataGridView1[man_pos_y, man_pos_x]->Value = img_man;
 				mapArray[man_pos_x, man_pos_y] = 4;
 			}
+		}
+	}
+
+	for (int i = 0; i < target_index; i++) {
+		int tempx = cli::safe_cast<int>(targetArray[i, 0]);
+		int tempy = cli::safe_cast<int>(targetArray[i, 1]);
+		if (!(mapArray[tempx, tempy]->Equals(3) || mapArray[tempx, tempy]->Equals(2) || mapArray[tempx, tempy]->Equals(4)))
+		{
+			dataGridView1[tempy, tempx]->Value = img_target;
 		}
 	}
 
