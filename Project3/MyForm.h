@@ -645,6 +645,7 @@ namespace Project3 {
 		// simulate
 
 		for (int i = 0; i < 10; i++) {
+			// System::Threading::Thread::Sleep(1000);
 			if (simArray[i] == "u" && man_pos_x - 1 != -1) {
 				// man behind a box
 				if (mapArray[man_pos_x - 1, man_pos_y]->Equals(2)) {
@@ -756,6 +757,7 @@ namespace Project3 {
 				}
 			}
 
+			
 		}
 
 		for (int i = 0; i < target_index; i++) {
