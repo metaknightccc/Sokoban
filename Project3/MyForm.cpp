@@ -175,13 +175,18 @@ void Project3::MyForm::OnKeyDown(System::Object^ sender, System::Windows::Forms:
 						move_or_not = false;
 					}
 				}
+
 			}
 		}
+
 	}
 
 
 
 	if (move_or_not == true) {
+		this->manRow = manX + dx[direction_temp];
+		this->manCol = manY + dy[direction_temp];
+
 		// 1
 		if (mapArray[manX, manY]->Equals(4))
 		{
@@ -312,8 +317,20 @@ void Project3::MyForm::OnKeyDown(System::Object^ sender, System::Windows::Forms:
 
 		// MessageBox::Show("这里会马上显示");
 	}
+	
+	//if (mapArray[this->manRow, this->manCol]->Equals(4))
+	//{
+	//	mapArray[this->manRow, this->manCol] = 5;
+	//	dataGridView1[this->manCol, this->manRow]->Value = img_ground;
+	//}
+	//if (mapArray[this->manRow, this->manCol]->Equals(7))
+	//{
+	//	mapArray[this->manRow, this->manCol] = 6;
+	//	dataGridView1[this->manCol, this->manRow]->Value = img_target;
+	//}
 	//this->manRow = manX;
 	//this->manCol = manY;
+	Console::WriteLine("{0},{1}", this->manRow, this->manCol);
 }
 
 
