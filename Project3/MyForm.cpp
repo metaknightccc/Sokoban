@@ -34,20 +34,20 @@ void Project3::MyForm::OnKeyDown(System::Object^ sender, System::Windows::Forms:
 			{
 				manX = i;
 				manY = j;
-				Console::Write("I AND J:{0},{1} \n", i, j);
-				Console::Write("COOD BEFORE:{0},{1} \n", manX, manY);
+				//Console::Write("I AND J:{0},{1} \n", i, j);
+				//Console::Write("COOD BEFORE:{0},{1} \n", manX, manY);
 			}
 		}
 	}
 
-	for (int j = 0; j < x; j++)
-	{
-		for (int k = 0; k < y; k++)
-		{
-			Console::Write("{0} ", mapArray[j, k]);
-		}
-		Console::WriteLine();
-	}
+	//for (int j = 0; j < x; j++)
+	//{
+	//	for (int k = 0; k < y; k++)
+	//	{
+	//		Console::Write("{0} ", mapArray[j, k]);
+	//	}
+	//	Console::WriteLine();
+	//}
 
 
 	int direction_temp = 0;
@@ -323,7 +323,7 @@ void Project3::MyForm::OnKeyDown(System::Object^ sender, System::Windows::Forms:
 	}
 	
 
-	Console::WriteLine("{0},{1}", this->manRow, this->manCol);
+	//Console::WriteLine("{0},{1}", this->manRow, this->manCol);
 }
 
 

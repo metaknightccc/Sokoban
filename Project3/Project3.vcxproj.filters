@@ -48,6 +48,9 @@
     <Image Include="groundWithDot.png">
       <Filter>资源文件</Filter>
     </Image>
+    <Image Include="C:\Users\赵\Downloads\azds2-sffui-001.ico">
+      <Filter>资源文件</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Media Include="C:\Users\赵\Downloads\230136170229143150232167134233162145.wav">

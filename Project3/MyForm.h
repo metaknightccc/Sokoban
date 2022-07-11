@@ -69,6 +69,8 @@ namespace Project3 {
 		   Image^ img_man = cli::safe_cast<Image^>(rm->GetObject("man"));
 		   Image^ img_ground = cli::safe_cast<Image^>(rm->GetObject("ground"));
 		   Image^ img_target = cli::safe_cast<Image^>(rm->GetObject("groundWithDot"));
+		   System::Drawing::Icon^ manIcon = cli::safe_cast<System::Drawing::Icon^>(rm->GetObject("manIcon"));
+
 		   //SoundPlayer^ bgmm= cli::safe_cast<SoundPlayer^>(rm->GetObject("bgm"));
 		   //SoundPlayer ^player = gcnew SoundPlayer();
 		   
@@ -99,6 +101,7 @@ namespace Project3 {
 			/// </summary>
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(MyForm::typeid));
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->button1 = (gcnew System::Windows::Forms::Button());
@@ -288,7 +291,7 @@ namespace Project3 {
 			this->调试按钮->Name = L"调试按钮";
 			this->调试按钮->Size = System::Drawing::Size(75, 23);
 			this->调试按钮->TabIndex = 19;
-			this->调试按钮->Text = L"调试按钮";
+			this->调试按钮->Text = L"测试样例";
 			this->调试按钮->UseVisualStyleBackColor = true;
 			this->调试按钮->Click += gcnew System::EventHandler(this, &MyForm::调试按钮_Click);
 			// 
@@ -319,8 +322,9 @@ namespace Project3 {
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->textBox2);
 			this->Controls->Add(this->textBox1);
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"MyForm";
-			this->Text = L"MyForm";
+			this->Text = L"推箱子";
 			this->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &MyForm::OnKeyDown);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			this->groupBox1->ResumeLayout(false);
@@ -496,6 +500,14 @@ namespace Project3 {
 					else if (mapArray[i, j] ->Equals(5)) {
 						box_robot[i, j] = 5;
 						wall_storage_space[i, j] = 5;
+					}
+					else if (mapArray[i, j]->Equals(3)) {
+						box_robot[i, j] = 2;
+						wall_storage_space[i, j] = 6;
+					}
+					else if (mapArray[i, j]->Equals(7)) {
+						box_robot[i, j] = 4;
+						wall_storage_space[i, j] = 6;
 					}
 
 				}
@@ -897,16 +909,16 @@ namespace Project3 {
 		//while(KeyEventArgs::Control)
 		if (Form::KeyPreview == false)
 		{
+			MessageBox::Show("点击后开始允许使用WASD操控小人,再次点击后取消");
 			this->自己玩->Text = L"不想玩了";
-			MessageBox^ nmsl2;
-			nmsl2->Show("开始自己玩");
+			//nmsl2->Show("开始自己玩");
 		}
 			
 		else
 		{
 			this->自己玩->Text = L"开始自己玩！";
-			MessageBox^ nmsl2;
-			nmsl2->Show("不想玩了");
+			//nmsl2->Show("不想玩了");
+			
 		}
 		//按一次取反一次，true接受键盘，否则不接受
 		Form::KeyPreview = !Form::KeyPreview;
@@ -1227,6 +1239,7 @@ private: System::Void 模拟_Click(System::Object^ sender, System::EventArgs^ e) {
 
 
 }
+
 };
 }
 

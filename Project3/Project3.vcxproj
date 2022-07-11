@@ -83,6 +83,7 @@
     <Link>
       <AdditionalDependencies />
       <EntryPointSymbol>main</EntryPointSymbol>
+      <SubSystem>NotSet</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -110,6 +111,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies />
+      <SubSystem>Windows</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -139,6 +141,7 @@
     <Image Include="..\images\brick.png" />
     <Image Include="..\images\ground.png" />
     <Image Include="..\images\man.png" />
+    <Image Include="C:\Users\赵\Downloads\azds2-sffui-001.ico" />
     <Image Include="groundWithDot.png" />
   </ItemGroup>
   <ItemGroup>
