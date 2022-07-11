@@ -830,7 +830,7 @@ namespace Project3 {
 			//tmpButton->Text = "好";
 			//tmpLabel->Text = "运算完成！";
 			//tmpForm->AcceptButton = tmpButton;
-			//tmpForm->Controls->Add(tmpButton);
+			//tmpForm->Controls->Add(tmpButton);1
 			tmpForm->Close();
 			
 
