@@ -906,16 +906,18 @@ namespace Project3 {
 
 private: System::Void 调试按钮_Click(System::Object^ sender, System::EventArgs^ e) {
 	dataGridView1->Columns->Clear();
-
+	static int cntNum = 0;
+	mapArray->Clear;
 	int inputx[4] = { 6,7,6,6 };
 	int inputy[4] = { 6,5,6,8 };
-	
+	this->textBox1->Text = Convert::ToString(inputx[cntNum]);
+	this->textBox2->Text = Convert::ToString(inputy[cntNum]);
 	
 
 	char inputss[4][8][8] = { 
 	{
 		{'O','O','O','O','O','O'},
-		{'O','S','-','-','O','O'},
+		{'O','S','-','-','-','O'},
 		{'O','-','B','B','-','O'},
 		{'O','-','B','R','-','O'},
 		{'O','S','-','-','S','O'},
@@ -932,7 +934,7 @@ private: System::Void 调试按钮_Click(System::Object^ sender, System::EventArgs^ 
 	},
 	{
 		{'-','-','O','O','O','O'},
-		{'O','O','O','-','S','O'},
+		{'O','O','O','R','S','O'},
 		{'O','S','-','B','-','O'},
 		{'O','O','-','B','-','O'},
 		{'O','S','B','-','O','O'},
@@ -954,7 +956,7 @@ private: System::Void 调试按钮_Click(System::Object^ sender, System::EventArgs^ 
 	};
 	// set a image for the cell[index_x,index_y]
 
-	int k = 3;
+	int k = cntNum;
 
 
 	for (int i = 0; i < inputy[k]; i++) {
@@ -979,14 +981,14 @@ private: System::Void 调试按钮_Click(System::Object^ sender, System::EventArgs^ 
 				mapArray[i, j] = 1;
 			}
 
-			if (inputss[k][i][j] == 'B')
+			else if (inputss[k][i][j] == 'B')
 			{
 				dataGridView1[j, i]->Value = img_box;
 				mapArray[i, j] = 2;
 			}
 
 
-			if (inputss[k][i][j] == 'R')
+			else if (inputss[k][i][j] == 'R')
 			{
 				if (this->hasMan == false)//当前还没创建过人
 				{
@@ -994,8 +996,8 @@ private: System::Void 调试按钮_Click(System::Object^ sender, System::EventArgs^ 
 
 				}
 				else {//当前已经创建过人了
-					mapArray[this->manRow, this->manCol] = 5;//把之前创建的人的地方改成地面方块
-					dataGridView1[this->manCol, this->manRow]->Value = img_ground;
+					//mapArray[this->manRow, this->manCol] = 5;//把之前创建的人的地方改成地面方块
+					//dataGridView1[this->manCol, this->manRow]->Value = img_ground;
 				}
 				dataGridView1[j, i]->Value = img_man;
 				mapArray[i, j] = 4;
@@ -1003,22 +1005,32 @@ private: System::Void 调试按钮_Click(System::Object^ sender, System::EventArgs^ 
 				this->manCol = j;
 			}
 
-			if (inputss[k][i][j] == '-')
+			else if (inputss[k][i][j] == '-')
 			{
 				dataGridView1[j, i]->Value = img_ground;
 				mapArray[i, j] = 5;
 			}
 
-			if (inputss[k][i][j] == 'S')
+			else if (inputss[k][i][j] == 'S')
 			{
 				dataGridView1[j, i]->Value = img_target;
 				mapArray[i, j] = 6;
 			}
 		}
+		//dataGridView1->Update();
 	}
-
+	for (int i = 0; i < inputx[cntNum]; i++)
+	{
+		for (int j = 0; j < inputy[cntNum]; j++)
+		{
+			Console::Write("{0} ", mapArray[i, j]);
+		}
+		Console::WriteLine();
+	}
+	Console::WriteLine();
+	cntNum = (cntNum + 1) % 4;
 	// mapArray 1:brick 2:box 3:box_target 4:man 5:ground 6:target
-	
+
 }
 private: System::Void 模拟_Click(System::Object^ sender, System::EventArgs^ e) {
 	int x = Convert::ToInt32(textBox1->Text);
@@ -1031,7 +1043,7 @@ private: System::Void 模拟_Click(System::Object^ sender, System::EventArgs^ e) {
 	{
 		for (int j = 0; j < y; j++)
 		{
-			if (mapArray[i, j]->Equals(4))
+			if (mapArray[i, j]->Equals(4)|| mapArray[i, j]->Equals(7))
 			{
 				manX = i;
 				manY = j;
