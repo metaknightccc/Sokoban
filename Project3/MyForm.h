@@ -50,7 +50,7 @@ namespace Project3 {
 		//创建了一个二维数组，100行，105列
 		public:array<int^, 2>^ mapArray = gcnew array<int^, 2>(100, 105);
 	private: System::Windows::Forms::Button^ 自己玩;
-	private: System::ComponentModel::BackgroundWorker^ backgroundWorker1;
+
 	private: System::Windows::Forms::RadioButton^ radioButton6;
 		   //记录下本次运行的结果
 		   ArrayList^ AnsArray;
@@ -87,6 +87,8 @@ namespace Project3 {
 
 	private: System::Windows::Forms::Button^ 调试按钮;
 	private: System::Windows::Forms::Button^ 模拟;
+	private: System::Windows::Forms::Label^ label2;
+
 
 	private:
 			/// <summary>
@@ -117,9 +119,9 @@ namespace Project3 {
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->自己玩 = (gcnew System::Windows::Forms::Button());
-			this->backgroundWorker1 = (gcnew System::ComponentModel::BackgroundWorker());
 			this->调试按钮 = (gcnew System::Windows::Forms::Button());
 			this->模拟 = (gcnew System::Windows::Forms::Button());
+			this->label2 = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->groupBox1->SuspendLayout();
 			this->SuspendLayout();
@@ -148,17 +150,17 @@ namespace Project3 {
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(75, 23);
 			this->button1->TabIndex = 2;
-			this->button1->Text = L"Generate";
+			this->button1->Text = L"生成";
 			this->button1->UseVisualStyleBackColor = true;
 			this->button1->Click += gcnew System::EventHandler(this, &MyForm::button1_Click);
 			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(434, 25);
+			this->button2->Location = System::Drawing::Point(430, 25);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(75, 23);
 			this->button2->TabIndex = 3;
-			this->button2->Text = L"Calculate";
+			this->button2->Text = L"计算";
 			this->button2->UseVisualStyleBackColor = true;
 			this->button2->Click += gcnew System::EventHandler(this, &MyForm::button2_Click);
 			// 
@@ -189,7 +191,7 @@ namespace Project3 {
 			this->groupBox1->Size = System::Drawing::Size(155, 173);
 			this->groupBox1->TabIndex = 15;
 			this->groupBox1->TabStop = false;
-			this->groupBox1->Text = L"Brick List";
+			this->groupBox1->Text = L"方块列表";
 			// 
 			// radioButton6
 			// 
@@ -199,7 +201,7 @@ namespace Project3 {
 			this->radioButton6->Size = System::Drawing::Size(59, 16);
 			this->radioButton6->TabIndex = 5;
 			this->radioButton6->TabStop = true;
-			this->radioButton6->Text = L"Target";
+			this->radioButton6->Text = L"目标点";
 			this->radioButton6->UseVisualStyleBackColor = true;
 			// 
 			// radioButton5
@@ -207,10 +209,10 @@ namespace Project3 {
 			this->radioButton5->AutoSize = true;
 			this->radioButton5->Location = System::Drawing::Point(7, 113);
 			this->radioButton5->Name = L"radioButton5";
-			this->radioButton5->Size = System::Drawing::Size(59, 16);
+			this->radioButton5->Size = System::Drawing::Size(47, 16);
 			this->radioButton5->TabIndex = 4;
 			this->radioButton5->TabStop = true;
-			this->radioButton5->Text = L"Ground";
+			this->radioButton5->Text = L"地面";
 			this->radioButton5->UseVisualStyleBackColor = true;
 			// 
 			// radioButton4
@@ -218,10 +220,10 @@ namespace Project3 {
 			this->radioButton4->AutoSize = true;
 			this->radioButton4->Location = System::Drawing::Point(7, 90);
 			this->radioButton4->Name = L"radioButton4";
-			this->radioButton4->Size = System::Drawing::Size(41, 16);
+			this->radioButton4->Size = System::Drawing::Size(35, 16);
 			this->radioButton4->TabIndex = 3;
 			this->radioButton4->TabStop = true;
-			this->radioButton4->Text = L"Man";
+			this->radioButton4->Text = L"人";
 			this->radioButton4->UseVisualStyleBackColor = true;
 			// 
 			// radioButton3
@@ -229,10 +231,10 @@ namespace Project3 {
 			this->radioButton3->AutoSize = true;
 			this->radioButton3->Location = System::Drawing::Point(7, 67);
 			this->radioButton3->Name = L"radioButton3";
-			this->radioButton3->Size = System::Drawing::Size(83, 16);
+			this->radioButton3->Size = System::Drawing::Size(107, 16);
 			this->radioButton3->TabIndex = 2;
 			this->radioButton3->TabStop = true;
-			this->radioButton3->Text = L"Box Target";
+			this->radioButton3->Text = L"已在点中的箱子";
 			this->radioButton3->UseVisualStyleBackColor = true;
 			// 
 			// radioButton2
@@ -240,10 +242,10 @@ namespace Project3 {
 			this->radioButton2->AutoSize = true;
 			this->radioButton2->Location = System::Drawing::Point(7, 44);
 			this->radioButton2->Name = L"radioButton2";
-			this->radioButton2->Size = System::Drawing::Size(41, 16);
+			this->radioButton2->Size = System::Drawing::Size(47, 16);
 			this->radioButton2->TabIndex = 1;
 			this->radioButton2->TabStop = true;
-			this->radioButton2->Text = L"Box";
+			this->radioButton2->Text = L"箱子";
 			this->radioButton2->UseVisualStyleBackColor = true;
 			// 
 			// radioButton1
@@ -251,10 +253,10 @@ namespace Project3 {
 			this->radioButton1->AutoSize = true;
 			this->radioButton1->Location = System::Drawing::Point(6, 20);
 			this->radioButton1->Name = L"radioButton1";
-			this->radioButton1->Size = System::Drawing::Size(53, 16);
+			this->radioButton1->Size = System::Drawing::Size(47, 16);
 			this->radioButton1->TabIndex = 0;
 			this->radioButton1->TabStop = true;
-			this->radioButton1->Text = L"Brick";
+			this->radioButton1->Text = L"障碍";
 			this->radioButton1->UseVisualStyleBackColor = true;
 			// 
 			// label1
@@ -302,15 +304,27 @@ namespace Project3 {
 			this->模拟->Name = L"模拟";
 			this->模拟->Size = System::Drawing::Size(75, 23);
 			this->模拟->TabIndex = 20;
-			this->模拟->Text = L"模拟";
+			this->模拟->Text = L"求解";
 			this->模拟->UseVisualStyleBackColor = true;
 			this->模拟->Click += gcnew System::EventHandler(this, &MyForm::模拟_Click);
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Location = System::Drawing::Point(564, 373);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(173, 156);
+			this->label2->TabIndex = 21;
+			this->label2->Text = L"帮助：\r\n1.输入行数与列数后点击生成，\r\n生成对应大小的地图\r\n2.点击右侧方块列表中的方块，\r\n使用鼠标左键在地图中放置\r\n3.放置完毕后点击计算按钮计算\r\n"
+				L"如何解出\r\n4.计算后，点击“求解”进行\r\n模拟操作\r\n5.“点击自己玩按钮后”可用\r\nWASD控制小人移动\r\n6.不想创建地图，“测试样例”\r\n按钮可提供一些"
+				L"地图";
 			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 12);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(738, 603);
+			this->Controls->Add(this->label2);
 			this->Controls->Add(this->模拟);
 			this->Controls->Add(this->调试按钮);
 			this->Controls->Add(this->自己玩);
@@ -322,8 +336,10 @@ namespace Project3 {
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->textBox2);
 			this->Controls->Add(this->textBox1);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::Fixed3D;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"MyForm";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"推箱子";
 			this->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &MyForm::OnKeyDown);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
@@ -698,7 +714,7 @@ namespace Project3 {
 								{
 									completed = 1;
 									Console::WriteLine("成功了，结果在当前的copyTmpMovesList中");
-									MessageBox::Show("成功解出！点击'模拟'开始解");
+									MessageBox::Show("成功解出！点击'求解'开始解");
 									this->模拟->Enabled = true;
 									AnsArray = gcnew ArrayList;
 									for (int tmpi = 0; tmpi < (int)copyTmpMovesList->Count; tmpi++)
@@ -1082,14 +1098,14 @@ private: System::Void 模拟_Click(System::Object^ sender, System::EventArgs^ e) {
 	for (int i = 0; i < (int)AnsArray->Count; i++)
 	{
 		Console::WriteLine("{0}", i);
-		for (int j = 0; j < x; j++)
-		{
-			for (int k = 0; k < y; k++)
-			{
-				Console::Write("{0} ", mapArray[j, k]);
-			}
-			Console::WriteLine();
-		}
+		//for (int j = 0; j < x; j++)
+		//{
+		//	for (int k = 0; k < y; k++)
+		//	{
+		//		Console::Write("{0} ", mapArray[j, k]);
+		//	}
+		//	Console::WriteLine();
+		//}
 		int tmpOldMan = (int)mapArray[manX, manY];
 		int tmpNewMan = (int)mapArray[manX + dx[(int)AnsArray[i]], manY + dy[(int)AnsArray[i]]];
 		int tmpNewBox = (int)mapArray[manX + 2 * dx[(int)AnsArray[i]], manY + 2 * dy[(int)AnsArray[i]]];
@@ -1234,11 +1250,13 @@ private: System::Void 模拟_Click(System::Object^ sender, System::EventArgs^ e) {
 		//MessageBox::Show("这里会马上显示");
 	}
 	Form::KeyPreview = true;//模拟后允许键盘操作
-
+	MessageBox::Show("求解结束！");
 
 
 
 }
+
+
 
 };
 }
