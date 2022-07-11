@@ -687,6 +687,7 @@ namespace Project3 {
 								{
 									completed = 1;
 									Console::WriteLine("成功了，结果在当前的copyTmpMovesList中");
+									MessageBox::Show("成功解出！点击'模拟'开始解");
 									this->模拟->Enabled = true;
 									AnsArray = gcnew ArrayList;
 									for (int tmpi = 0; tmpi < (int)copyTmpMovesList->Count; tmpi++)
@@ -816,6 +817,7 @@ namespace Project3 {
 			if (completed == 0)
 			{
 				Console::WriteLine("找不到结果");
+				MessageBox::Show("没有解出");
 			}
 			Console::WriteLine("while结束");
 			System::Collections::ArrayList^ aaa=gcnew ArrayList;
