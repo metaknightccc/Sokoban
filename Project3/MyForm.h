@@ -1175,7 +1175,7 @@ private: System::Void Ä£Äâ_Click(System::Object^ sender, System::EventArgs^ e) {
 		//System::Threading::Tasks::Task::Delay(10000);
 
 		DateTime curr=DateTime::Now;
-		while (curr.AddMilliseconds(1000) > DateTime::Now)
+		while (curr.AddMilliseconds(500) > DateTime::Now)
 		{
 			Application::DoEvents();
 		}
