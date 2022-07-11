@@ -907,17 +907,45 @@ namespace Project3 {
 private: System::Void 调试按钮_Click(System::Object^ sender, System::EventArgs^ e) {
 	dataGridView1->Columns->Clear();
 
+	int inputx[4] = { 6,7,6,6 };
+	int inputy[4] = { 6,5,6,8 };
 	
 	
 
-	char inputss[2][8][8] = { {
+	char inputss[4][8][8] = { 
+	{
 		{'O','O','O','O','O','O'},
 		{'O','S','-','-','O','O'},
 		{'O','-','B','B','-','O'},
 		{'O','-','B','R','-','O'},
 		{'O','S','-','-','S','O'},
-		{'O','O','O','O','O','O'} },
-	
+		{'O','O','O','O','O','O'} 
+	},
+	{
+		{'O','O','O','O','O'},
+		{'O','S','R','O','O'},
+		{'O','B','B','S','O'},
+		{'O','-','B','-','O'},
+		{'O','-','S','-','O'},
+		{'O','O','-','-','O'},
+		{'-','O','O','O','O'}
+	},
+	{
+		{'-','-','O','O','O','O'},
+		{'O','O','O','-','S','O'},
+		{'O','S','-','B','-','O'},
+		{'O','O','-','B','-','O'},
+		{'O','S','B','-','O','O'},
+		{'O','O','O','O','O','O'}
+	},
+	{
+		{'O','O','O','O','O','O','O','O'},
+		{'O','-','-','-','-','R','-','O'},
+		{'O','-','-','-','-','B','-','O'},
+		{'O','O','O','O','O','B','S','O'},
+		{'-','-','-','-','O','-','S','O'},
+		{'-','-','-','-','O','O','O','O'}
+	}
 	
 	
 	
@@ -926,24 +954,24 @@ private: System::Void 调试按钮_Click(System::Object^ sender, System::EventArgs^ 
 	};
 	// set a image for the cell[index_x,index_y]
 
+	int k = 3;
 
 
-
-	for (int i = 0; i < 6; i++) {
+	for (int i = 0; i < inputy[k]; i++) {
 		DataGridViewColumn^ newCol = (gcnew System::Windows::Forms::DataGridViewImageColumn);
 		newCol->Width = 64;
 		dataGridView1->Columns->Add(newCol);
 	}
 
 
-	for (int i = 0; i < 5; i++) {
+	for (int i = 0; i < inputx[k]-1; i++) {
 		dataGridView1->Rows->Add();
 	}
 
-	int k = 0;
-	for (int i = 0; i < 6; i++)
+
+	for (int i = 0; i < inputx[k]; i++)
 	{
-		for (int j = 0; j < 6; j++)
+		for (int j = 0; j < inputy[k]; j++)
 		{
 			if(inputss[k][i][j]=='O')
 			{
@@ -1149,6 +1177,10 @@ private: System::Void 模拟_Click(System::Object^ sender, System::EventArgs^ e) {
 				else if (mapArray[j, k]->Equals(6))
 				{
 					dataGridView1[k, j]->Value = img_target;
+				}
+				else if (mapArray[j, k]->Equals(7))
+				{
+					dataGridView1[k, j]->Value = img_man;
 				}
 				dataGridView1->Update();
 				
