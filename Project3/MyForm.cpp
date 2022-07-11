@@ -204,8 +204,8 @@ void Project3::MyForm::OnKeyDown(System::Object^ sender, System::Windows::Forms:
 			{
 				manX = i;
 				manY = j;
-				Console::Write("I AND J:{0},{0} \n", i, j);
-				Console::Write("COOD BEFORE:{0},{0} \n", manX, manY);
+				Console::Write("I AND J:{0},{1} \n", i, j);
+				Console::Write("COOD BEFORE:{0},{1} \n", manX, manY);
 			}
 		}
 	}	
@@ -229,8 +229,8 @@ void Project3::MyForm::OnKeyDown(System::Object^ sender, System::Windows::Forms:
 	if (e->KeyCode == Keys::W)direction_temp = 1;
 
 
-	if (e->KeyCode == Keys::A) {
-		direction_temp = 4;
+	if (e->KeyCode == Keys::W) {
+		direction_temp = 1;
 
 		//Console::WriteLine("-=-===");
 		/*
@@ -251,7 +251,7 @@ void Project3::MyForm::OnKeyDown(System::Object^ sender, System::Windows::Forms:
 			Console::WriteLine("1==");
 		}
 		else {
-			if (mapArray[manX - 1, manY]->Equals(2)) {
+			if (mapArray[manX - 1, manY]->Equals(1)) {
 				move_or_not = false;
 				Console::WriteLine("2==");
 			}
@@ -267,16 +267,22 @@ void Project3::MyForm::OnKeyDown(System::Object^ sender, System::Windows::Forms:
 						Console::WriteLine("3==");
 					}
 				}
+				else {
+					if (mapArray[manX - 1, manY]->Equals(2) || mapArray[manX - 1, manY]->Equals(2)) {
+						move_or_not = false;
+						Console::WriteLine("3==");
+					}
+				}
 			}
 		}
 
 	}
-	if (e->KeyCode == Keys::D) {
-		direction_temp = 2;
+	if (e->KeyCode == Keys::S) {
+		direction_temp = 3;
 		if (manX + 1 == x)
 			move_or_not = false;
 		else {
-			if (mapArray[manX + 1, manY]->Equals(2))
+			if (mapArray[manX + 1, manY]->Equals(1))
 				move_or_not = false;
 			else {
 				if (manX + 2 != x) {
@@ -288,15 +294,20 @@ void Project3::MyForm::OnKeyDown(System::Object^ sender, System::Windows::Forms:
 						(mapArray[manX + 1, manY]->Equals(2) && mapArray[manX + 2, manY]->Equals(3)))
 						move_or_not = false;
 				}
+				else {
+					if (mapArray[manX + 1, manY]->Equals(2) || mapArray[manX + 1, manY]->Equals(2)) {
+						move_or_not = false;
+					}
+				}
 			}
 		}
 	}
-	if (e->KeyCode == Keys::W) {
-		direction_temp = 1;
+	if (e->KeyCode == Keys::A) {
+		direction_temp = 4;
 		if (manY - 1 == -1)
 			move_or_not = false;
 		else {
-			if (mapArray[manX, manY - 1]->Equals(2))
+			if (mapArray[manX, manY - 1]->Equals(1))
 				move_or_not = false;
 			else {
 				if (manY - 2 != -1) {
@@ -308,15 +319,20 @@ void Project3::MyForm::OnKeyDown(System::Object^ sender, System::Windows::Forms:
 						(mapArray[manX, manY - 1]->Equals(2) && mapArray[manX, manY - 2]->Equals(3)))
 						move_or_not = false;
 				}
+				else {
+					if (mapArray[manX, manY - 1]->Equals(2) || mapArray[manX, manY-1]->Equals(2)) {
+						move_or_not = false;
+					}
+				}
 			}
 		}
 	}
-	if (e->KeyCode == Keys::S) {
-		direction_temp = 3;
+	if (e->KeyCode == Keys::D) {
+		direction_temp = 2;
 		if (manY + 1 == y)
 			move_or_not = false;
 		else {
-			if (mapArray[manX, manY + 1]->Equals(2))
+			if (mapArray[manX, manY + 1]->Equals(1))
 				move_or_not = false;
 			else {
 				if (manY + 2 != y) {
@@ -327,6 +343,11 @@ void Project3::MyForm::OnKeyDown(System::Object^ sender, System::Windows::Forms:
 						(mapArray[manX, manY + 1]->Equals(3) && mapArray[manX, manY + 2]->Equals(3)) ||
 						(mapArray[manX, manY + 1]->Equals(2) && mapArray[manX, manY + 2]->Equals(3)))
 						move_or_not = false;
+				}
+				else {
+					if (mapArray[manX, manY + 1]->Equals(2) || mapArray[manX, manY + 1]->Equals(2)) {
+						move_or_not = false;
+					}
 				}
 			}
 		}
@@ -444,7 +465,7 @@ void Project3::MyForm::OnKeyDown(System::Object^ sender, System::Windows::Forms:
 			Console::WriteLine();
 		}
 		Console::Write("DIRECTION:{0} ", direction_temp);
-		Console::Write("COOD:{0},{0} ", manX+dx[direction_temp],manY+dy[direction_temp]);
+		Console::Write("COOD:{0},{1} ", manX+dx[direction_temp],manY+dy[direction_temp]);
 		Console::WriteLine("==========");*/
 
 
@@ -475,6 +496,10 @@ void Project3::MyForm::OnKeyDown(System::Object^ sender, System::Windows::Forms:
 				else if (mapArray[j, k]->Equals(6))
 				{
 					dataGridView1[k, j]->Value = img_target;
+				}
+				else if (mapArray[j, k]->Equals(7))
+				{
+					dataGridView1[k, j]->Value = img_man;
 				}
 				dataGridView1->Update();
 			}
