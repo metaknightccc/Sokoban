@@ -24,4 +24,4 @@ void Project3::MyForm::OnKeyDown(System::Object^ sender, System::Windows::Forms:
 }
 
 
-
+//arrayList的removeat和add可以当队列用
