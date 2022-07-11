@@ -363,7 +363,7 @@ namespace Project3 {
 		}
 		void playMusic(void)
 		{
-			hdlSound->Play();
+			hdlSound->PlayLooping();
 		}
 		void stopMusic(void)
 		{
