@@ -141,6 +141,9 @@
     <Image Include="..\images\man.png" />
     <Image Include="groundWithDot.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="C:\Users\赵\Downloads\230136170229143150232167134233162145.wav" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

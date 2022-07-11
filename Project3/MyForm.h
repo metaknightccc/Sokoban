@@ -8,7 +8,7 @@ namespace Project3 {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
-
+	using namespace System::Media;
 	/// <summary>
 	/// MyForm 摘要
 	/// </summary>
@@ -55,6 +55,7 @@ namespace Project3 {
 		   //记录下本次运行的结果
 		   ArrayList^ AnsArray;
 
+		   //hdlSound->
 		   System::Reflection::Assembly^ assembly = System::Reflection::Assembly::GetExecutingAssembly();
 		   Resources::ResourceManager^ rm = gcnew Resources::ResourceManager("Project3" + ".Resource", assembly);
 
@@ -68,7 +69,12 @@ namespace Project3 {
 		   Image^ img_man = cli::safe_cast<Image^>(rm->GetObject("man"));
 		   Image^ img_ground = cli::safe_cast<Image^>(rm->GetObject("ground"));
 		   Image^ img_target = cli::safe_cast<Image^>(rm->GetObject("groundWithDot"));
-
+		   //SoundPlayer^ bgmm= cli::safe_cast<SoundPlayer^>(rm->GetObject("bgm"));
+		   //SoundPlayer ^player = gcnew SoundPlayer();
+		   
+		   //SoundPlayer hdlSound = SoundPlayer(bgmm);
+		  
+		   
 		   //记录下人的行与列
 		   int manRow = 0;
 		   int manCol = 0;

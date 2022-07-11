@@ -49,4 +49,9 @@
       <Filter>资源文件</Filter>
     </Image>
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="C:\Users\赵\Downloads\230136170229143150232167134233162145.wav">
+      <Filter>资源文件</Filter>
+    </Media>
+  </ItemGroup>
 </Project>
