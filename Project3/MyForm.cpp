@@ -118,7 +118,8 @@ void Project3::MyForm::OnKeyDown(System::Object^ sender, System::Windows::Forms:
 	//		{
 	//			dataGridView1[man_pos_y, man_pos_x]->Value = img_ground;
 	//			dataGridView1[man_pos_y - 1, man_pos_x]->Value = img_man;
-	//			dataGridView1[man_pos_y - 2, man_pos_x]->Value = img_box;
+	//			dataGridView1[man_pos_y - 2, man_pos_x]->Value = img_box
+// ;
 	//			mapArray[man_pos_x, man_pos_y] = 5;
 	//			mapArray[man_pos_x, man_pos_y - 1] = 4;
 	//			mapArray[man_pos_x, man_pos_y - 2] = 2;
@@ -250,18 +251,18 @@ void Project3::MyForm::OnKeyDown(System::Object^ sender, System::Windows::Forms:
 			Console::WriteLine("1==");
 		}
 		else {
-			if (mapArray[manX - 1, manY] == 2) {
+			if (mapArray[manX - 1, manY]->Equals(2)) {
 				move_or_not = false;
 				Console::WriteLine("2==");
 			}
 			else {
 				if (manX - 2 != -1) {
-					if ((mapArray[manX - 1, manY] == 2 && mapArray[manX - 2, manY] == 1) ||
-						(mapArray[manX - 1, manY] == 3 && mapArray[manX - 2, manY] == 1) ||
-						(mapArray[manX - 1, manY] == 2 && mapArray[manX - 2, manY] == 2) ||
-						(mapArray[manX - 1, manY] == 3 && mapArray[manX - 2, manY] == 2) ||
-						(mapArray[manX - 1, manY] == 3 && mapArray[manX - 2, manY] == 3) ||
-						(mapArray[manX - 1, manY] == 2 && mapArray[manX - 2, manY] == 3)) {
+					if ((mapArray[manX - 1, manY]->Equals(2) && mapArray[manX - 2, manY]->Equals(1)) ||
+						(mapArray[manX - 1, manY]->Equals(3) && mapArray[manX - 2, manY]->Equals(1)) ||
+						(mapArray[manX - 1, manY]->Equals(2) && mapArray[manX - 2, manY]->Equals(2)) ||
+						(mapArray[manX - 1, manY]->Equals(3) && mapArray[manX - 2, manY]->Equals(2)) ||
+						(mapArray[manX - 1, manY]->Equals(3) && mapArray[manX - 2, manY]->Equals(3)) ||
+						(mapArray[manX - 1, manY]->Equals(2) && mapArray[manX - 2, manY]->Equals(3))) {
 						move_or_not = false;
 						Console::WriteLine("3==");
 					}
@@ -275,16 +276,16 @@ void Project3::MyForm::OnKeyDown(System::Object^ sender, System::Windows::Forms:
 		if (manX + 1 == x)
 			move_or_not = false;
 		else {
-			if (mapArray[manX + 1, manY] == 2)
+			if (mapArray[manX + 1, manY]->Equals(2))
 				move_or_not = false;
 			else {
 				if (manX + 2 != x) {
-					if ((mapArray[manX + 1, manY] == 2 && mapArray[manX + 2, manY] == 1) ||
-						(mapArray[manX + 1, manY] == 3 && mapArray[manX + 2, manY] == 1) ||
-						(mapArray[manX + 1, manY] == 2 && mapArray[manX + 2, manY] == 2) ||
-						(mapArray[manX + 1, manY] == 3 && mapArray[manX + 2, manY] == 2) ||
-						(mapArray[manX + 1, manY] == 3 && mapArray[manX + 2, manY] == 3) ||
-						(mapArray[manX + 1, manY] == 2 && mapArray[manX + 2, manY] == 3))
+					if ((mapArray[manX + 1, manY]->Equals(2) && mapArray[manX + 2, manY]->Equals(1)) ||
+						(mapArray[manX + 1, manY]->Equals(3) && mapArray[manX + 2, manY]->Equals(1)) ||
+						(mapArray[manX + 1, manY]->Equals(2) && mapArray[manX + 2, manY]->Equals(2)) ||
+						(mapArray[manX + 1, manY]->Equals(3) && mapArray[manX + 2, manY]->Equals(2)) ||
+						(mapArray[manX + 1, manY]->Equals(3) && mapArray[manX + 2, manY]->Equals(3)) ||
+						(mapArray[manX + 1, manY]->Equals(2) && mapArray[manX + 2, manY]->Equals(3)))
 						move_or_not = false;
 				}
 			}
@@ -295,16 +296,16 @@ void Project3::MyForm::OnKeyDown(System::Object^ sender, System::Windows::Forms:
 		if (manY - 1 == -1)
 			move_or_not = false;
 		else {
-			if (mapArray[manX, manY - 1] == 2)
+			if (mapArray[manX, manY - 1]->Equals(2))
 				move_or_not = false;
 			else {
 				if (manY - 2 != -1) {
-					if ((mapArray[manX, manY - 1] == 2 && mapArray[manX, manY - 2] == 1) ||
-						(mapArray[manX, manY - 1] == 3 && mapArray[manX, manY - 2] == 1) ||
-						(mapArray[manX, manY - 1] == 2 && mapArray[manX, manY - 2] == 2) ||
-						(mapArray[manX, manY - 1] == 3 && mapArray[manX, manY - 2] == 2) ||
-						(mapArray[manX, manY - 1] == 3 && mapArray[manX, manY - 2] == 3) ||
-						(mapArray[manX, manY - 1] == 2 && mapArray[manX, manY - 2] == 3))
+					if ((mapArray[manX, manY - 1]->Equals(2) && mapArray[manX, manY - 2]->Equals(1)) ||
+						(mapArray[manX, manY - 1]->Equals(3) && mapArray[manX, manY - 2]->Equals(1)) ||
+						(mapArray[manX, manY - 1]->Equals(2) && mapArray[manX, manY - 2]->Equals(2)) ||
+						(mapArray[manX, manY - 1]->Equals(3) && mapArray[manX, manY - 2]->Equals(2)) ||
+						(mapArray[manX, manY - 1]->Equals(3) && mapArray[manX, manY - 2]->Equals(3)) ||
+						(mapArray[manX, manY - 1]->Equals(2) && mapArray[manX, manY - 2]->Equals(3)))
 						move_or_not = false;
 				}
 			}
@@ -315,16 +316,16 @@ void Project3::MyForm::OnKeyDown(System::Object^ sender, System::Windows::Forms:
 		if (manY + 1 == y)
 			move_or_not = false;
 		else {
-			if (mapArray[manX, manY + 1] == 2)
+			if (mapArray[manX, manY + 1]->Equals(2))
 				move_or_not = false;
 			else {
 				if (manY + 2 != y) {
-					if ((mapArray[manX, manY + 1] == 2 && mapArray[manX, manY + 2] == 1) ||
-						(mapArray[manX, manY + 1] == 3 && mapArray[manX, manY + 2] == 1) ||
-						(mapArray[manX, manY + 1] == 2 && mapArray[manX, manY + 2] == 2) ||
-						(mapArray[manX, manY + 1] == 3 && mapArray[manX, manY + 2] == 2) ||
-						(mapArray[manX, manY + 1] == 3 && mapArray[manX, manY + 2] == 3) ||
-						(mapArray[manX, manY + 1] == 2 && mapArray[manX, manY + 2] == 3))
+					if ((mapArray[manX, manY + 1]->Equals(2) && mapArray[manX, manY + 2]->Equals(1)) ||
+						(mapArray[manX, manY + 1]->Equals(3) && mapArray[manX, manY + 2]->Equals(1)) ||
+						(mapArray[manX, manY + 1]->Equals(2) && mapArray[manX, manY + 2]->Equals(2)) ||
+						(mapArray[manX, manY + 1]->Equals(3) && mapArray[manX, manY + 2]->Equals(2)) ||
+						(mapArray[manX, manY + 1]->Equals(3) && mapArray[manX, manY + 2]->Equals(3)) ||
+						(mapArray[manX, manY + 1]->Equals(2) && mapArray[manX, manY + 2]->Equals(3)))
 						move_or_not = false;
 				}
 			}
