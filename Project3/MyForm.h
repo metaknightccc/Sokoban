@@ -881,7 +881,7 @@ namespace Project3 {
 		}
 		bool isInVisitedMoves(ArrayList^ VisitedMoves, array<int^, 2>^ copy_tmp_box_robot)
 		{
-			for (int i = 0; i < (int)VisitedMoves->Count; i++)
+			for (int i = (int)VisitedMoves->Count-1; i>=0 ; i--)
 			{
 				if (erWeiSame((array<int^, 2>^)VisitedMoves[i], copy_tmp_box_robot))
 				{
