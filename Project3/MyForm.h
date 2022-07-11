@@ -154,7 +154,7 @@ namespace Project3 {
 			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(463, 25);
+			this->button2->Location = System::Drawing::Point(434, 25);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(75, 23);
 			this->button2->TabIndex = 3;
@@ -168,11 +168,11 @@ namespace Project3 {
 			this->dataGridView1->AllowUserToResizeRows = false;
 			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dataGridView1->ColumnHeadersVisible = false;
-			this->dataGridView1->Location = System::Drawing::Point(28, 67);
+			this->dataGridView1->Location = System::Drawing::Point(12, 81);
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->RowHeadersVisible = false;
 			this->dataGridView1->RowTemplate->Height = 64;
-			this->dataGridView1->Size = System::Drawing::Size(859, 472);
+			this->dataGridView1->Size = System::Drawing::Size(546, 472);
 			this->dataGridView1->TabIndex = 4;
 			this->dataGridView1->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MyForm::dataGridView1_CellContentClick);
 			// 
@@ -184,7 +184,7 @@ namespace Project3 {
 			this->groupBox1->Controls->Add(this->radioButton3);
 			this->groupBox1->Controls->Add(this->radioButton2);
 			this->groupBox1->Controls->Add(this->radioButton1);
-			this->groupBox1->Location = System::Drawing::Point(903, 166);
+			this->groupBox1->Location = System::Drawing::Point(571, 177);
 			this->groupBox1->Name = L"groupBox1";
 			this->groupBox1->Size = System::Drawing::Size(155, 173);
 			this->groupBox1->TabIndex = 15;
@@ -277,7 +277,7 @@ namespace Project3 {
 			// 
 			// 自己玩
 			// 
-			this->自己玩->Location = System::Drawing::Point(740, 25);
+			this->自己玩->Location = System::Drawing::Point(623, 25);
 			this->自己玩->Name = L"自己玩";
 			this->自己玩->Size = System::Drawing::Size(103, 23);
 			this->自己玩->TabIndex = 18;
@@ -287,7 +287,7 @@ namespace Project3 {
 			// 
 			// 调试按钮
 			// 
-			this->调试按钮->Location = System::Drawing::Point(351, 25);
+			this->调试按钮->Location = System::Drawing::Point(332, 25);
 			this->调试按钮->Name = L"调试按钮";
 			this->调试按钮->Size = System::Drawing::Size(75, 23);
 			this->调试按钮->TabIndex = 19;
@@ -297,7 +297,8 @@ namespace Project3 {
 			// 
 			// 模拟
 			// 
-			this->模拟->Location = System::Drawing::Point(586, 25);
+			this->模拟->Enabled = false;
+			this->模拟->Location = System::Drawing::Point(528, 25);
 			this->模拟->Name = L"模拟";
 			this->模拟->Size = System::Drawing::Size(75, 23);
 			this->模拟->TabIndex = 20;
@@ -309,7 +310,7 @@ namespace Project3 {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 12);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1097, 603);
+			this->ClientSize = System::Drawing::Size(738, 603);
 			this->Controls->Add(this->模拟);
 			this->Controls->Add(this->调试按钮);
 			this->Controls->Add(this->自己玩);
@@ -686,6 +687,7 @@ namespace Project3 {
 								{
 									completed = 1;
 									Console::WriteLine("成功了，结果在当前的copyTmpMovesList中");
+									this->模拟->Enabled = true;
 									AnsArray = gcnew ArrayList;
 									for (int tmpi = 0; tmpi < (int)copyTmpMovesList->Count; tmpi++)
 									{
@@ -1044,6 +1046,8 @@ private: System::Void 调试按钮_Click(System::Object^ sender, System::EventArgs^ 
 
 }
 private: System::Void 模拟_Click(System::Object^ sender, System::EventArgs^ e) {
+	this->模拟->Enabled = false;
+	Form::KeyPreview = false;//模拟期间不允许键盘操作
 	int x = Convert::ToInt32(textBox1->Text);
 	int y = Convert::ToInt32(textBox2->Text);
 	int dx[5] = { 0,-1,0,1,0 };
@@ -1163,6 +1167,8 @@ private: System::Void 模拟_Click(System::Object^ sender, System::EventArgs^ e) {
 		}
 		manX = manX + dx[(int)AnsArray[i]];
 		manY = manY + dy[(int)AnsArray[i]];
+		this->manRow = manX;
+		this->manCol = manY;
 		//System::Threading::Thread::Sleep(500);
 		//System::Threading::Tasks::Task::Delay(10000);
 
@@ -1213,7 +1219,7 @@ private: System::Void 模拟_Click(System::Object^ sender, System::EventArgs^ e) {
 
 		//MessageBox::Show("这里会马上显示");
 	}
-
+	Form::KeyPreview = true;//模拟后允许键盘操作
 
 
 

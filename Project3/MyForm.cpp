@@ -13,6 +13,8 @@ int main(array<String^>^ args) {
 //在主界面获取键盘输入
 void Project3::MyForm::OnKeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e)
 {
+	//键盘操作后模拟要变灰
+	this->模拟->Enabled = false;
 	int x = Convert::ToInt32(textBox1->Text);
 	int y = Convert::ToInt32(textBox2->Text);
 	int dx[5] = { 0, -1, 0, 1, 0 };
@@ -318,18 +320,7 @@ void Project3::MyForm::OnKeyDown(System::Object^ sender, System::Windows::Forms:
 		// MessageBox::Show("这里会马上显示");
 	}
 	
-	//if (mapArray[this->manRow, this->manCol]->Equals(4))
-	//{
-	//	mapArray[this->manRow, this->manCol] = 5;
-	//	dataGridView1[this->manCol, this->manRow]->Value = img_ground;
-	//}
-	//if (mapArray[this->manRow, this->manCol]->Equals(7))
-	//{
-	//	mapArray[this->manRow, this->manCol] = 6;
-	//	dataGridView1[this->manCol, this->manRow]->Value = img_target;
-	//}
-	//this->manRow = manX;
-	//this->manCol = manY;
+
 	Console::WriteLine("{0},{1}", this->manRow, this->manCol);
 }
 
