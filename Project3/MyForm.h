@@ -372,6 +372,7 @@ namespace Project3 {
 				mapArray[index_x, index_y] = 4;
 				this->manRow = index_x;
 				this->manCol = index_y;
+
 			}
 				
 			if (radioButton5->Checked)
