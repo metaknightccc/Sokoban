@@ -434,8 +434,8 @@ namespace Project3 {
 		{
 			Form^ tmpForm = gcnew Form;
 			tmpForm->StartPosition = FormStartPosition::CenterScreen;
-			tmpForm->Show();
-			tmpForm->Text = "疯狂运算中";
+			
+			tmpForm->Text = "疯狂运算中!";
 			
 			//tmpForm->Controls->Add(tmpButton);
 			tmpForm->ControlBox = false;
@@ -446,6 +446,8 @@ namespace Project3 {
 			tmpLabel->Text = "疯狂运算中！";
 
 			tmpForm->Controls->Add(tmpLabel);
+			//tmpForm->Show();
+			MessageBox::Show("点击确定继续计算，注意界面可能会卡住！");
 			//tmpLabel->ma
 			int x, y;
 			x = Convert::ToInt32(textBox1->Text); // row
@@ -505,8 +507,8 @@ namespace Project3 {
 						storage_col1->Add(j);
 						target_pos_row1->Add(i);
 						target_pos_col1->Add(j);
-
-						MessageBox::Show("找到了一个target");
+						Console::WriteLine("找到了一个target");
+						//MessageBox::Show("找到了一个target");
 					}
 				}
 			}
@@ -514,8 +516,10 @@ namespace Project3 {
 			//{
 			//	Console::Write("{0},{1}", storage_row1[i], storage_col1[i]);
 			//}
-			MessageBox::Show("目标点有"+Convert::ToString(target_pos_row1->Count)+"个");
-			MessageBox::Show("{0}"+Convert::ToString(target_pos_row1->Count));
+			Console::WriteLine("目标点有{0}个", target_pos_row1->Count);
+			//MessageBox::Show("目标点有"+Convert::ToString(target_pos_row1->Count)+"个");
+			//Console::WriteLine("目标点有{0}个", target_pos_row1->Count);
+			//MessageBox::Show("{0}"+Convert::ToString(target_pos_row1->Count));
 			//MessageBox::Show(Convert::ToString(manhatten_dis()));
 
 
@@ -557,7 +561,8 @@ namespace Project3 {
 					}
 				}
 			}
-			MessageBox::Show(Convert::ToString(boxRobtDistance));//经验证是计算正确的，还不知道有什么用
+			//MessageBox::Show(Convert::ToString(boxRobtDistance));//经验证是计算正确的，还不知道有什么用
+			Console::WriteLine("{0}", boxRobtDistance);
 			//以上是到defManhattan之前的所有内容，已经写上了注释，注意x和y的关系，除了datagridview是先列后行外，其他的都是先行后列，已经改好了
 			//mahattan单独写一个函数
 
