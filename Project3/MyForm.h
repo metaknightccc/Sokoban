@@ -18,6 +18,7 @@ namespace Project3 {
 			MyForm(void)
 			{
 				InitializeComponent();
+				playMusic();
 				//
 				//TODO:  在此处添加构造函数代码
 				//
@@ -58,11 +59,6 @@ namespace Project3 {
 		   //hdlSound->
 		   System::Reflection::Assembly^ assembly = System::Reflection::Assembly::GetExecutingAssembly();
 		   Resources::ResourceManager^ rm = gcnew Resources::ResourceManager("Project3" + ".Resource", assembly);
-
-
-
-
-
 		   Image^ img_brick = cli::safe_cast<Image^>(rm->GetObject("brick"));
 		   Image^ img_box = cli::safe_cast<Image^>(rm->GetObject("box"));
 		   Image^ img_box_target = cli::safe_cast<Image^>(rm->GetObject("box_target"));
@@ -71,11 +67,11 @@ namespace Project3 {
 		   Image^ img_target = cli::safe_cast<Image^>(rm->GetObject("groundWithDot"));
 		   System::Drawing::Icon^ manIcon = cli::safe_cast<System::Drawing::Icon^>(rm->GetObject("manIcon"));
 
-		   //SoundPlayer^ bgmm= cli::safe_cast<SoundPlayer^>(rm->GetObject("bgm"));
+		   System::IO::Stream ^ bgmm = cli::safe_cast<System::IO::Stream^>(rm->GetObject("bgm"));
 		   //SoundPlayer ^player = gcnew SoundPlayer();
 		   
 		   //SoundPlayer hdlSound = SoundPlayer(bgmm);
-		  
+		   SoundPlayer^ hdlSound= gcnew SoundPlayer(bgmm);
 		   
 		   //记录下人的行与列
 		   int manRow = 0;
@@ -88,6 +84,7 @@ namespace Project3 {
 	private: System::Windows::Forms::Button^ 调试按钮;
 	private: System::Windows::Forms::Button^ 模拟;
 	private: System::Windows::Forms::Label^ label2;
+	private: System::Windows::Forms::CheckBox^ checkBox1;
 
 
 	private:
@@ -122,6 +119,7 @@ namespace Project3 {
 			this->调试按钮 = (gcnew System::Windows::Forms::Button());
 			this->模拟 = (gcnew System::Windows::Forms::Button());
 			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->checkBox1 = (gcnew System::Windows::Forms::CheckBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->groupBox1->SuspendLayout();
 			this->SuspendLayout();
@@ -319,11 +317,25 @@ namespace Project3 {
 				L"如何解出\r\n4.计算后，点击“求解”进行\r\n模拟操作\r\n5.“点击自己玩按钮后”可用\r\nWASD控制小人移动\r\n6.不想创建地图，“测试样例”\r\n按钮可提供一些"
 				L"地图";
 			// 
+			// checkBox1
+			// 
+			this->checkBox1->AutoSize = true;
+			this->checkBox1->Checked = true;
+			this->checkBox1->CheckState = System::Windows::Forms::CheckState::Checked;
+			this->checkBox1->Location = System::Drawing::Point(591, 94);
+			this->checkBox1->Name = L"checkBox1";
+			this->checkBox1->Size = System::Drawing::Size(72, 16);
+			this->checkBox1->TabIndex = 22;
+			this->checkBox1->Text = L"背景音乐";
+			this->checkBox1->UseVisualStyleBackColor = true;
+			this->checkBox1->CheckedChanged += gcnew System::EventHandler(this, &MyForm::checkBox1_CheckedChanged);
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 12);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(738, 603);
+			this->Controls->Add(this->checkBox1);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->模拟);
 			this->Controls->Add(this->调试按钮);
@@ -348,6 +360,14 @@ namespace Project3 {
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
+		}
+		void playMusic(void)
+		{
+			hdlSound->Play();
+		}
+		void stopMusic(void)
+		{
+			hdlSound->Stop();
 		}
 		#pragma endregion
 		private: System::Void textBox2_TextChanged(System::Object^ sender, System::EventArgs^ e) {
@@ -1258,6 +1278,15 @@ private: System::Void 模拟_Click(System::Object^ sender, System::EventArgs^ e) {
 
 
 
+private: System::Void checkBox1_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
+	if (this->checkBox1->Checked == false)
+	{
+		this->stopMusic();
+	}
+	else
+		this->playMusic();
+	
+}
 };
 }
 
