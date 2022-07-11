@@ -15,8 +15,10 @@ void Project3::MyForm::OnKeyDown(System::Object^ sender, System::Windows::Forms:
 {
 	//键盘操作后模拟要变灰
 	this->模拟->Enabled = false;
-	int x = Convert::ToInt32(textBox1->Text);
-	int y = Convert::ToInt32(textBox2->Text);
+	int x = this->mapRow;
+	int y = this->mapCol;
+	//int x = Convert::ToInt32(textBox1->Text);
+	//int y = Convert::ToInt32(textBox2->Text);
 	int dx[5] = { 0, -1, 0, 1, 0 };
 	int dy[5] = { 0, 0, 1, 0, -1 };
 

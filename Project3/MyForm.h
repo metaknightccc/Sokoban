@@ -79,15 +79,12 @@ namespace Project3 {
 		   int manRow = 0;
 		   int manCol = 0;
 		   bool hasMan = false;//记录是否已经创建过人了
-		   //记录有几个待求箱子
-		   int boxes = 0;
-		   //数组直接记录箱子坐标，最大十个点，其实实际不应该超过5个，多了算法解不出
-		   array<int^, 2>^ boxesArray = gcnew array<int^, 2>(10, 2);
-		   //记录有几个待求点
-		   int targetPos = 0;
+		   //记录下地图的行数与列数，不再直接使用框中的数字
+		   int mapRow = 0;
+		   int mapCol = 0;
+
 	private: System::Windows::Forms::Button^ 调试按钮;
 	private: System::Windows::Forms::Button^ 模拟;
-		   //数组直接记录箱子坐标，最大十个点，其实实际不应该超过5个，多了算法解不出
 
 	private:
 			/// <summary>
@@ -402,11 +399,11 @@ namespace Project3 {
 			dataGridView1->Columns->Clear();
 			
 			// read from textbox
+			this->mapRow= Convert::ToInt32(textBox1->Text);
+			this->mapCol= Convert::ToInt32(textBox2->Text);
 			int x, y;
-	
-			x = Convert::ToInt32(textBox1->Text);
-
-			y = Convert::ToInt32(textBox2->Text);
+			x = this->mapRow;
+			y = this->mapCol;
 
 			// build x*y gridview cells
 
@@ -457,8 +454,10 @@ namespace Project3 {
 			MessageBox::Show("点击确定继续计算，注意界面可能会卡住！");
 			//tmpLabel->ma
 			int x, y;
-			x = Convert::ToInt32(textBox1->Text); // row
-			y = Convert::ToInt32(textBox2->Text); // col
+			//x = Convert::ToInt32(textBox1->Text); // row
+			//y = Convert::ToInt32(textBox2->Text); // col
+			x = this->mapRow;
+			y = this->mapCol;
 			int max_length = x;
 
 			// box_robot -:0 ' ':5
@@ -839,8 +838,8 @@ namespace Project3 {
 		int manhattan(array<int^, 2>^ state,ArrayList^ storagesX, ArrayList^ storagesY)
 		{
 			int distance = 0;
-			int x = Convert::ToInt32(textBox1->Text);
-			int y = Convert::ToInt32(textBox2->Text);
+			int x = this->mapRow;
+			int y = this->mapCol;
 			for (int i = 0; i < x; i++)
 			{
 				for (int j = 0; j < y; j++)
@@ -865,8 +864,8 @@ namespace Project3 {
 		}
 		bool erWeiSame(array<int^, 2>^ a, array<int^, 2>^ b)
 		{
-			int x = Convert::ToInt32(textBox1->Text);
-			int y = Convert::ToInt32(textBox2->Text);
+			int x = this->mapRow;
+			int y = this->mapCol;
 			for (int i = 0; i < x; i++)
 			{
 				for (int j = 0; j < y; j++)
@@ -927,7 +926,8 @@ private: System::Void 调试按钮_Click(System::Object^ sender, System::EventArgs^ 
 	int inputy[4] = { 6,5,6,8 };
 	this->textBox1->Text = Convert::ToString(inputx[cntNum]);
 	this->textBox2->Text = Convert::ToString(inputy[cntNum]);
-	
+	this->mapRow = inputx[cntNum];
+	this->mapCol = inputy[cntNum];
 
 	char inputss[4][8][8] = { 
 	{
@@ -1050,8 +1050,8 @@ private: System::Void 调试按钮_Click(System::Object^ sender, System::EventArgs^ 
 private: System::Void 模拟_Click(System::Object^ sender, System::EventArgs^ e) {
 	this->模拟->Enabled = false;
 	Form::KeyPreview = false;//模拟期间不允许键盘操作
-	int x = Convert::ToInt32(textBox1->Text);
-	int y = Convert::ToInt32(textBox2->Text);
+	int x = this->mapRow;
+	int y = this->mapCol;
 	int dx[5] = { 0,-1,0,1,0 };
 	int dy[5] = { 0,0,1,0,-1 };
 	int manX = 0;
