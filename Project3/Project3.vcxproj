@@ -136,16 +136,18 @@
     <EmbeddedResource Include="MyForm.resx">
       <DependentUpon>MyForm.h</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resource.resx" />
+    <EmbeddedResource Include="Resource.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\images\azds2-sffui-001.ico" />
     <Image Include="..\images\box.png" />
     <Image Include="..\images\box_target .png" />
     <Image Include="..\images\brick.png" />
     <Image Include="..\images\ground.png" />
+    <Image Include="..\images\groundWithDot.png" />
     <Image Include="..\images\man.png" />
-    <Image Include="C:\Users\赵\Downloads\azds2-sffui-001.ico" />
-    <Image Include="groundWithDot.png" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="..\sound\bgm.wav" />

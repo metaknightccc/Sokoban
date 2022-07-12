@@ -45,10 +45,10 @@
     <Image Include="..\images\ground.png">
       <Filter>资源文件</Filter>
     </Image>
-    <Image Include="groundWithDot.png">
+    <Image Include="..\images\groundWithDot.png">
       <Filter>资源文件</Filter>
     </Image>
-    <Image Include="C:\Users\赵\Downloads\azds2-sffui-001.ico">
+    <Image Include="..\images\azds2-sffui-001.ico">
       <Filter>资源文件</Filter>
     </Image>
   </ItemGroup>
