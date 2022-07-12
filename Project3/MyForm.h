@@ -636,17 +636,26 @@ namespace Project3 {
 			System::Collections::ArrayList^ boxRobtDistanceList = gcnew ArrayList;			
 			//4
 			System::Collections::ArrayList^ visitedMovesList = gcnew ArrayList;
-			if(!isInVisitedMoves(visitedMovesList,box_robot))
-			//if (!visitedMovesList->Contains(box_robot))
-			{
-				visitedMovesList->Add(box_robot);
-			}/*
-			Console::WriteLine("进行了一次contains判断");
+/*
+			Console::WriteLine("进行了一次contains判断")aaa;
 			Console::WriteLine(visitedMovesList->Contains(box_robot));*/
-			boxRobtDistanceList->Add(boxRobtDistance);
-			boxRobotList->Add(box_robot);
+			int findmin = 0;
+			for (findmin = 0; findmin < (int)boxRobtDistanceList->Count; findmin++)
+			{
+				if ((int)boxRobtDistanceList[findmin] > boxRobtDistance)
+					break;
+			}
+			if (!isInVisitedMoves(visitedMovesList, box_robot))
+			{
+				visitedMovesList->Insert(findmin, box_robot);
+			}
+			boxRobtDistanceList->Insert(findmin, boxRobtDistance);
+			boxRobotList->Insert(findmin, box_robot);
+			movesListList->Insert(findmin, movesList);
+			//boxRobtDistanceList->Add(boxRobtDistance);
+			//boxRobotList->Add(box_robot);
+			//movesListList->Add(movesList);
 
-			movesListList->Add(movesList);
 
 			int robot_x = -1, robot_y = -1, completed = 0;
 			int cnt = 0;
@@ -787,12 +796,21 @@ namespace Project3 {
 									//int manhattanNum = manhattan2(copy_tmp_box_robot, storage_row1);
 									//这里需要用到manhattan函数
 									//三个list往里放
-									boxRobtDistanceList->Add(manhattanNum);
-									boxRobotList->Add(copy_tmp_box_robot);
-									movesListList->Add(copyTmpMovesList);
+									int findmin = 0;
+									for (findmin = 0; findmin < (int)boxRobtDistanceList->Count; findmin++)
+									{
+										if ((int)boxRobtDistanceList[findmin] > manhattanNum)
+											break;
+									}
+									boxRobtDistanceList->Insert(findmin, manhattanNum);
+									boxRobotList->Insert(findmin, copy_tmp_box_robot);
+									movesListList->Insert(findmin, copyTmpMovesList);
+									//boxRobtDistanceList->Add(manhattanNum);
+									//boxRobotList->Add(copy_tmp_box_robot);
+									//movesListList->Add(copyTmpMovesList);
+									visitedMovesList->Insert(findmin, copy_tmp_box_robot);
 
-
-									visitedMovesList->Add(copy_tmp_box_robot);
+									//visitedMovesList->Add(copy_tmp_box_robot);
 								}
 							}
 						}
@@ -848,12 +866,22 @@ namespace Project3 {
 								//int manhattan = 77777;//这里需要用到manhattan函数236
 								//三个list往里放
 								int manhattanNum = manhattan(copy_tmp_box_robot, storage_row1, storage_col1) + boxRobtDistance4 + stepsTillNow;
-								boxRobtDistanceList->Add(manhattanNum);
-								boxRobotList->Add(copy_tmp_box_robot);
-								movesListList->Add(copyTmpMovesList);
+								int findmin = 0;
+								for (findmin = 0; findmin < (int)boxRobtDistanceList->Count; findmin++)
+								{
+									if ((int)boxRobtDistanceList[findmin] > manhattanNum)
+										break;
+								}
+								boxRobtDistanceList->Insert(findmin, manhattanNum);
+								boxRobotList->Insert(findmin, copy_tmp_box_robot);
+								movesListList->Insert(findmin, copyTmpMovesList);
+								visitedMovesList->Insert(findmin, copy_tmp_box_robot);
+								//boxRobtDistanceList->Add(manhattanNum);
+								//boxRobotList->Add(copy_tmp_box_robot);
+								//movesListList->Add(copyTmpMovesList);
 
 
-								visitedMovesList->Add(copy_tmp_box_robot);
+								//visitedMovesList->Add(copy_tmp_box_robot);
 
 							}
 						}
